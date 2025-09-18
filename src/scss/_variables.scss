@@ -1,0 +1,19 @@
+@use 'functions' as *;
+
+$font-base: 'Pt', sans-serif;
+
+$bg-light: #FDF0E9; 
+
+// sm
+$cards-sm-width: rem(320);
+// md
+$cards-md-width: rem(640);
+// lg
+$cards-lg-width: rem(960);
+
+// cards-width
+$cards-width: rem(960); 
+
+$card-content-width: rem(238);
+
+$breakpoints: (sm: rem(768), md: rem(960), lg: rem(1400));
