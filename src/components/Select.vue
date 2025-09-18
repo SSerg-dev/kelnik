@@ -189,7 +189,9 @@ function intersectionFilterCards() {
 }
 
 function filterRooms(rooms: string, amount: number) {
-  const result = cards.cards.filter((c) => c.rooms <= amount);
+  // $$
+  // const result = cards.cards.filter((c: any) => c.rooms <= amount);
+  const result = cards.cards.filter((c: any) => c.rooms === amount);
   if (result.length > 0) {
     cards.setFilterRooms(result);
     intersectionFilterCards();
@@ -200,7 +202,7 @@ function filterRooms(rooms: string, amount: number) {
 }
 function filterFloor(floor: string) {
   const result = cards.cards.filter(
-    (c) => c.floor >= +minFloor.value && c.floor <= +maxFloor.value
+    (c: any) => c.floor >= +minFloor.value && c.floor <= +maxFloor.value
   );
   if (result.length > 0) {
     cards.setFilterFloor(result);
@@ -212,7 +214,7 @@ function filterFloor(floor: string) {
 }
 function filterSquare(square: string) {
   const result = cards.cards.filter(
-    (c) => c.square >= +minSquare.value && c.square <= +maxSquare.value
+    (c: any) => c.square >= +minSquare.value && c.square <= +maxSquare.value
   );
   if (result.length > 0) {
     cards.setFilterSquare(result);
@@ -224,7 +226,7 @@ function filterSquare(square: string) {
 }
 function filterPrice(price: string) {
   const result = cards.cards.filter(
-    (c) =>
+    (c: any) =>
       c.price / 1000000 >= +minCost.value && c.price / 1000000 <= +maxCost.value
   );
   if (result.length > 0) {
