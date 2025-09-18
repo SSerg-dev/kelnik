@@ -16,7 +16,7 @@
       <div class="card__content__body">
         <div class="card__content__image">
           <div>
-            <img src="../assets/images/plan.svg" alt="plan" />
+            <img src="../assets/images/plan.svg" alt="plan" style="width: 170px;" />
           </div>
         </div>
       </div>

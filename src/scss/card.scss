@@ -45,7 +45,7 @@
   height: 450px;
 }
 .card__content_button {
-   margin: 3vh 0 3vh .5vh;
+  margin: 3vh 0 3vh 0.5vh;
   width: 200px;
   border-radius: 10px;
 }
@@ -72,13 +72,16 @@
   justify-content: center;
 
   margin: 2vh auto;
-  
 
   border: solid 1px #ccc;
   border-radius: 20px;
 
   width: 220px;
   height: 250px;
+  // $$
+  @include md {
+    margin-left: -0.4vh;
+  }
 }
 
 .card__content__number {
