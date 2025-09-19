@@ -1,7 +1,7 @@
 import './main.css'
 import 'materialize-css'
 
-import 'nouislider'
+import "nouislider";
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

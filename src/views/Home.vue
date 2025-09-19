@@ -52,8 +52,9 @@ main {
   gap: 10px;
   margin-top: 10px;
 
-  .card-items {
+  .card-items { 
     order: 1;
+    padding-left: 34px;
   }
   .select {
     order: 2;
