@@ -1,7 +1,6 @@
-
 <template>
   <div>
-    <div class="cards"> 
+    <div class="cards">
       <CardItem
         v-for="(card, index) in visibleCards"
         :key="card.id"
@@ -18,77 +17,70 @@
       Показать ещё ...
     </button>
 
-    <p v-if="!cardStore.hasMore" class="end-text">
-      Все квартиры загружены
-    </p>
+    <p v-if="!cardStore.hasMore" class="end-text">Все квартиры загружены</p>
 
-    <button
-      v-show="showButton"
-      class="back-to-top"
-      @click="scrollToTop(1000)"
-    >
+    <button v-show="showButton" class="back-to-top" @click="scrollToTop(1000)">
       Наверх
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import CardItem from "./CardItem.vue";
-import { useCardStore } from "../stores/card";
-import { ref, onMounted, onUnmounted } from "vue";
+import CardItem from './CardItem.vue'
+import { useCardStore } from '../stores/card'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
-const cardStore = useCardStore();
+const cardStore = useCardStore()
+const showButton = ref(false)
+const isLoading = ref(false)
+const showLoadMore = ref(true)
+const limit = 12 // cards per page
+const pageNumber = ref(1)
 
-const visibleCards = ref<any[]>([]);
-const showButton = ref(false);
-const isLoading = ref(false);
-const showLoadMore = ref(true);
-const limit = 12; // cards per page
-const pageNumber = ref(1);
+const visibleCards = computed(() => {
+  return cardStore.getFilterCards
+})
 
 async function loadCards() {
-  await cardStore.fetchCards(pageNumber.value, limit);
-  visibleCards.value = [...cardStore.cards];
-
+  await cardStore.fetchCards(pageNumber.value, limit)
   if (!cardStore.hasMore) {
-    showLoadMore.value = false;
+    showLoadMore.value = false
   }
 }
 
-
 async function loadMore() {
-  pageNumber.value++;
-  await loadCards();
+  pageNumber.value++
+  await loadCards()
 }
 
 function scrollToTop(duration = 500) {
-  const start = window.scrollY;
-  const startTime = performance.now();
+  const start = window.scrollY
+  const startTime = performance.now()
 
   function animate(time: number) {
-    const elapsed = time - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3); // cubic ease-out
-    window.scrollTo(0, start * (1 - ease));
-    if (progress < 1) requestAnimationFrame(animate);
+    const elapsed = time - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    const ease = 1 - Math.pow(1 - progress, 3) // cubic ease-out
+    window.scrollTo(0, start * (1 - ease))
+    if (progress < 1) requestAnimationFrame(animate)
   }
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animate)
 }
 
 function checkScroll() {
-  showButton.value = window.scrollY > 100;
+  showButton.value = window.scrollY > 100
 }
 
 onMounted(async () => {
-  await loadCards(); // первая загрузка
-  window.addEventListener("scroll", checkScroll);
-  checkScroll();
-});
+  await loadCards() // первая загрузка
+  window.addEventListener('scroll', checkScroll)
+  checkScroll()
+})
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", checkScroll);
-});
+  window.removeEventListener('scroll', checkScroll)
+})
 </script>
 
 <style scoped>
