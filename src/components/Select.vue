@@ -128,7 +128,7 @@ const minCost = ref(2.23)
 const maxCost = ref(12.43)
 
 function resetHandler() {
-  window.location.reload();
+  window.location.reload()
 }
 // ------------------ FILTER FUNCTIONS ------------------
 function resetFilters() {
